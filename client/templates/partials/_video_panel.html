@@ -1,0 +1,11 @@
+{% raw %}
+    <div id="video-canvas" ng-controller="videoController as vidCtl">
+        <videogular
+        vg-theme="vidCtl.config.theme.url"
+        vg-update-state="vidCtl.config.updateState($state)">
+            <vg-media vg-src="vidCtl.config.sources"
+                      vg-native-controls="true">
+            </vg-media>
+        </videogular>
+    </div>
+{% endraw %}
