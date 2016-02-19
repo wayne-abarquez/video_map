@@ -1,21 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if client_id %}
-        <script type="text/javascript"
-                src="https://maps.googleapis.com/maps/api/js?v=3.exp&client={{ client_id }}&libraries=geometry,places"></script>
-    {% else %}
-        <script type="text/javascript"
-                src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,places"></script>
-    {% endif %}
-
-
     {% raw %}
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry"></script>
+
     <div id="index-container" ng-controller="indexController as indexCtl">
         <treasure-overlay-spinner active='spinner.active'>
     {% endraw %}
         <div ng-controller="gmapController as gmapCtl">
-            <!-- Map Drawing Panel -->
+            <!-- Video Panel -->
             {% include "partials/_video_panel.html" %}
             <!-- map canvas dimensions will be computed during map initialization -->
             {% include "partials/_map.html" %}

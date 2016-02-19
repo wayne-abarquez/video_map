@@ -19,12 +19,14 @@ gulp.task('vendor-scripts', function () {
         paths.bower + '/sweetalert/dist/sweetalert.min.js',
         paths.bower + '/ngSweetAlert/SweetAlert.min.js',
         paths.bower + '/angular-treasure-overlay-spinner/dist/treasure-overlay-spinner.min.js',
+        paths.srcLibJs + '/v3_epoly.js',
+        paths.srcLibJs + '/canvas_marker.js',
         paths.bower + '/videogular/videogular.min.js',
         paths.bower + '/videogular-controls/vg-controls.min.js',
         paths.bower + '/videogular-buffering/vg-buffering.min.js'
     ])
         .pipe($.concat('vendor.min.js'))
-        .pipe($.uglify({mangle: false}).on('error', $.util.log))
+        //.pipe($.uglify({mangle: false}).on('error', $.util.log))
         .pipe(gulp.dest(paths.destJs + '/'))
         .pipe($.size());
 });

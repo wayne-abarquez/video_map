@@ -2,67 +2,40 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('gmapController', ['$rootScope', 'gmapServices', gmapController]);
+    .controller('gmapController', ['$rootScope', 'carServices', 'gmapServices', gmapController]);
 
-    function gmapController($rootScope, gmapServices) {
+    function gmapController($rootScope, carServices, gmapServices) {
 
         var vm = this;
 
-        $rootScope.spinner = {
-            active: false
-        };
-
         vm.initialize = initialize;
 
-        vm.initialize();
+        google.maps.event.addDomListener(window, 'load', initialize);
 
         function initialize () {
-            gmapServices.createMap('map-canvas');
+           window.map = gmapServices.createMap('map-canvas');
 
-            console.log('gmap controller initialized!');
+            //carServices.initialize();
+            initCar();
+
+            $rootScope.$on('video-player-state-changed', videoStateChanged);
         }
 
-        //function showSolarDetailInfowindow (_solar) {
-        //    if(!(_solar && _solar.id)) return;
-        //
-        //    solarGmapServices.hideSolarMarkers();
-        //
-        //    var defered = modalServices.showUpdateSolar(_solar, vm, event);
-        //    defered.then(function (response) {
-        //        console.log('modalServices.showUpdateSolar response:');
-        //        console.log(response);
-        //
-        //            if (!response) return;
-        //
-        //            solarGmapServices.gmapService.setZoomDefault();
-        //            solarGmapServices.showSolarMarkers();
-        //
-        //            if($rootScope.selectedSolar && response) {
-        //                $rootScope.selectedSolar.coordinates = response.coordinates;
-        //            }
-        //        }, function (errorResponse) {
-        //
-        //            solarGmapServices.gmapService.setZoomDefault();
-        //            solarGmapServices.showSolarMarkers();
-        //
-        //
-        //            console.log('show update solar detail failed');
-        //            console.log(errorResponse);
-        //        });
-        //}
-        //
-        //
-        //function showMarkers () {
-        //    solarGmapServices.showSolarMarkers();
-        //    solarGmapServices.resetZoom();
-        //}
+        function videoStateChanged (event, param) {
+            //console.log('video-player-state-changed triggered!');
+            if(param.state === 'play') {
+                if(marker) {
+                    marker.setMap(window.map);
+                }
+                //carServices.startCar();
+                startCar();
+                console.log('video is played');
+            } else {
+                //carServices.stopCar();
+                marker.setMap(null);
+                console.log('video is paused');
+            }
+        }
 
-        //function hideMarkers () {
-        //    console.log('called from event : modal-opened');
-        //    console.log('gmapcontroller hide markers');
-        //    solarGmapServices.hideSolarMarkers();
-        //    // Hide Solar List Table
-        //    $rootScope.showSolarList = false;
-        //}
     }
 }());

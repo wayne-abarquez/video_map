@@ -37,6 +37,15 @@ gulp.task('watch', function(event) {
         });
     });
 
+    gulp.watch([
+        paths.bower + '/**/*.js',
+        paths.srcLibJs + '/*.js'
+    ], function (event) {
+        runSequence('vendor-scripts', function () {
+            browserSync.reload(event.path);
+        });
+    });
+
     // Watch Sass Files
     gulp.watch(paths.srcSass + '/**/*.scss',
         function (event) {
