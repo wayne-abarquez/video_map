@@ -58,48 +58,109 @@ angular.module('demoApp')
                 carServices.slowDown(300);
             }
             else if (time > 14 && time < 20) {
+                carServices.changeSpeed(90);
+            }
+            else if (time > 28.5 && time < 31.5) {
+                carServices.slowDown(200);
+                carServices.accelerateCarAfter(2000);
+            }
+            else if (time > 41 && time < 49.5) {
+                console.log('first stop on bridge');
+                carServices.pauseCar();
+            }
+
+            else if (time > 49.5 && time < 51.5) {
+                console.log('first accelerate on bridge');
+                carServices.accelerateCarAfter(0, 300);
+            }
+            else if (time > 51.5 && time < 58) {
+                console.log('second stop on bridge');
+                carServices.pauseCar();
+            }
+            else if (time > 58 && time < 58.5) {
+                console.log('second accelerate on bridge');
+                carServices.accelerateCarAfter(0, 300);
+            }
+            else if (time > 58.5 && time < 62.5) {
+                console.log('third stop on bridge');
+                carServices.pauseCar();
+            }
+
+            else if (time > 62.5 && time < 68.5) {
+                console.log('third accelerate on bridge');
+                carServices.accelerateCarAfter(0, 205);
+            }
+
+            else if (time > 68.5 && time < 82) {
+                console.log('accelerate after uturn on bridge');
+                carServices.accelerateCarAfter(0, 70);
+            }
+
+            else if (time > 82 && time < 84.8) {
+                console.log('change speed');
                 carServices.changeSpeed(100);
             }
-            else if (time > 31 && time < 31.5) {
-                carServices.slowDown(300);
-                carServices.accelerateCarAfter(1000);
+
+            else if (time > 84.8 && time < 85.5) {
+                console.log('slowing down');
+                carServices.changeSpeed(300);
             }
-            else if (time > 41 && time < 50) {
+
+            else if (time > 85.5 && time < 85.8) {
+                console.log('first stop on stop light');
                 carServices.pauseCar();
             }
-            else if (time > 50 && time < 52) {
-                carServices.accelerateCarAfter(0, 300);
+
+            else if (time > 85.8 && time < 94.3) {
+                console.log('first accelerate after stop light');
+                carServices.accelerate(90);
             }
-            else if (time > 52 && time < 58) {
+
+            else if (time > 94.3 && time < 121.5) {
+                console.log('second stop on stop light');
                 carServices.pauseCar();
             }
-            else if (time > 58 && time < 59) {
-                carServices.accelerateCarAfter(0, 300);
+
+            else if (time > 121.5 && time < 130.5) {
+                console.log('second accelerate after stop light');
+                carServices.accelerate(100);
             }
-            else if (time > 59 && time < 63) {
+
+
+            else if (time > 130.5 && time < 133) {
+                console.log('third stop on stop light');
                 carServices.pauseCar();
+
+                // first stop before samsung
             }
-            else if (time > 63 && time < 70) {
-                carServices.accelerateCarAfter(0, 110);
+
+            else if (time > 133 && time < 140.5) {
+                console.log('third accelerate after stop light');
+                carServices.accelerate(120);
             }
-            else if (time > 71 && time < 83) {
-                carServices.accelerateCarAfter(0, 80);
-            }
-            else if (time > 85.5 && time < 85.9) {
+
+            else if (time > 140.5 && time < 160) {
+                console.log('fourth stop on stop light');
                 carServices.pauseCar();
+
+                // stop across samsung
             }
-            else if (time > 85.9 && time < 100) {
-                carServices.accelerateCarAfter(0, 80);
+
+            else if (time > 160 && time < 167) {
+                console.log('fourth accelerate after stop light');
+                carServices.accelerate(90);
             }
-            //else if (time > 98 && time < 124) {
-            //    carServices.pauseCar();
-            //}
-            //else if (time > 124 && time < 100) {
-            //    carServices.accelerateCarAfter(0, 100);
-            //}
-            //else if (time > 135 && time < 136) {
-            //    carServices.pauseCar();
-            //}
+
+            else if (time > 167 && time < 168) {
+                console.log('slowing down');
+                carServices.changeSpeed(200);
+            }
+
+
+            else if (time > 168 && time < 174) {
+                console.log('fifth accelerate after stop light');
+                carServices.accelerate(80);
+            }
         }
 
     }

@@ -34,7 +34,8 @@ angular.module('demoApp')
         service.initialize = initialize;
         service.runCar = runCar;
         service.startCar = startCar;
-        //service.stopCar = stopCar;
+
+        service.accelerate = accelerate;
 
         service.accelerateCar = accelerateCar;
         service.pauseCar = pauseCar;
@@ -125,6 +126,13 @@ angular.module('demoApp')
             }, 0);
         }
 
+        function accelerate (speed) {
+            var _speed = speed || 100;
+
+            changeSpeed(_speed);
+            service.isPaused = false;
+        }
+
         function accelerateCar () {
             $timeout(function(){
                 changeSpeed(100);
@@ -154,14 +162,9 @@ angular.module('demoApp')
                 _speed = speed || 100;
 
             $timeout(function(){
-                changeSpeed(_speed);
-                service.isPaused = false;
+                accelerate(_speed);
             }, _timeMillis);
         }
-
-        //function stopCar () {
-        //    service.car.setMap(null);
-        //}
 
         return service;
     }

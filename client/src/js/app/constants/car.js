@@ -809,6 +809,11 @@
         {
             "lat": 37.40934,
             "lng": -121.95230000000001
+        },
+
+        {
+            "lat": 37.409594,
+            "lng": -121.952742
         }
     ];
 
@@ -816,6 +821,6 @@
 
     angular.module('demoApp')
         .value('CAR_PATH', pathFromDirections)
-        .value('CAR_PATH_DISTANCE', 4915)
+        .value('CAR_PATH_DISTANCE', 4962)
         .value('CAR_ICON', carIcon);
 }());

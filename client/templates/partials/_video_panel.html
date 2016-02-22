@@ -6,8 +6,9 @@
         vg-update-state="vidCtl.updateState($state)">
             <vg-media vg-src="vidCtl.config.sources"></vg-media><!-- vg-native-controls="true" -->
 
-            <vg-controls vg-autohide="vidCtl.config.plugins.controls.autoHide"
-                         vg-autohide-time="vidCtl.config.plugins.controls.autoHideTime">
+            <!--<vg-controls vg-autohide="vidCtl.config.plugins.controls.autoHide"
+                         vg-autohide-time="vidCtl.config.plugins.controls.autoHideTime">-->
+            <vg-controls>
                 <vg-play-pause-button></vg-play-pause-button>
                 <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
                 <vg-scrub-bar>
