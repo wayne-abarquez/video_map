@@ -1,8 +1,21 @@
 #video-canvas {
+  overflow: hidden;
   padding: 0;
   margin: 0;
   width: 40%;
   z-index: 1;
   float: left;
   background-color: black;
+
+  video {
+    transform: scale(1.28);
+  }
+
+  videogular {
+    font-family: Roboto, 'Helvetica Neue', sans-serif !important;
+
+    vg-time-display, [videogular] vg-time-display {
+      font-size: 12px !important;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 *.pyc
-venv/*
-logs/*.*
 .idea/
-client/src/bower_components/**
-client/node_modules/**
-client/static/videos/*.*
+venv/
+logs/*
+client/node_modules/
+client/src/bower_components/
+client/static/videos/

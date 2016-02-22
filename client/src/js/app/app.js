@@ -19,7 +19,7 @@
                 .accentPalette('pink');
         });
 
-    console.log('demo app initialized!');
+    //console.log('demo app initialized!');
 
 }());
 

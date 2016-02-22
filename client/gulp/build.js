@@ -13,11 +13,16 @@ gulp.task('images', function () {
         .pipe(gulp.dest(paths.destImages + '/'));
 });
 
-gulp.task('fonts', function () {
-    return gulp.src(paths.bower + '/**/*')
-        .pipe($.filter('**/*.{eot,otf,ttf,woff,woff2}'))
-        .pipe($.flatten())
-        .pipe(gulp.dest(paths.destFonts + '/'));
+gulp.task('videogular-fonts', function () {
+    return gulp.src(paths.bower + '/videogular-themes-default/fonts/*')
+        .pipe(gulp.dest(paths.destFonts + '/videogular-themes-default/fonts'));
+});
+
+gulp.task('fonts', ['videogular-fonts'], function () {
+    //return gulp.src(paths.bower + '/**/*')
+    //    .pipe($.filter('**/*.{eot,otf,ttf,woff,woff2}'))
+    //    .pipe($.flatten())
+    //    .pipe(gulp.dest(paths.destFonts + '/'));
 });
 
 gulp.task('clean', function (done) {

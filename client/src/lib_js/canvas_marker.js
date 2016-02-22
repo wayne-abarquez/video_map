@@ -1,6 +1,5 @@
 function CanvasMarker(opts) {
   // Mandatory parameters
-  //this.map_ = opts.map;
   this.point = opts.position;
 
   // Optional parameters
@@ -9,10 +8,12 @@ function CanvasMarker(opts) {
 
   this.image_ = opts.image;
 
-  this.canvas_ = null;
-  this.context_ = null;
+  this.canvas_ = document.createElement('canvas');
+  this.canvas_.setAttribute('id', this.id_);
+  this.canvas_.height = 32;
+  this.canvas_.width = 32;
+  this.context_ = this.canvas_.getContext('2d');
 
-  //this.setMap(this.map_);
   this.setMap(opts.map);
 }
 
@@ -20,22 +21,13 @@ CanvasMarker.prototype = new google.maps.OverlayView();
 
 CanvasMarker.prototype.onAdd = function() {
   var div = document.createElement('div');
-  div.style.position = 'absolute';
-
-  var canvas = document.createElement('canvas');
-  canvas.setAttribute('id', this.id_);
-  canvas.height = 32;
-  canvas.width = 32;
-  this.canvas_ = canvas;
-  this.context_ = canvas.getContext('2d');
+      div.style.position = 'absolute';
 
   div.appendChild(this.canvas_);
-
   this.div_ = div;
 
   var panes = this.getPanes();
-  panes.floatShadow.appendChild(this.div_);
-  // panes.overlayMouseTarget.appendChild(this.div_);
+      panes.floatShadow.appendChild(this.div_);
 }
 
 CanvasMarker.prototype.draw = function() {
@@ -53,8 +45,6 @@ CanvasMarker.prototype.onRemove = function() {
 }
 
 CanvasMarker.prototype.plot = function(angle) {
-  console.log('plotting car: ',angle);
-
   var cosa = Math.cos(angle);
   var sina = Math.sin(angle);
 

@@ -13,26 +13,23 @@ angular.module('demoApp')
         google.maps.event.addDomListener(window, 'load', initialize);
 
         function initialize () {
-           window.map = gmapServices.createMap('map-canvas');
+           gmapServices.createMap('map-canvas');
 
-            //carServices.initialize();
-            initCar();
+            // angular service
+            carServices.initialize();
 
             $rootScope.$on('video-player-state-changed', videoStateChanged);
         }
 
         function videoStateChanged (event, param) {
-            //console.log('video-player-state-changed triggered!');
             if(param.state === 'play') {
-                if(marker) {
-                    marker.setMap(window.map);
-                }
-                //carServices.startCar();
-                startCar();
+                // angular service
+                carServices.startCar();
                 console.log('video is played');
             } else {
-                //carServices.stopCar();
-                marker.setMap(null);
+                // angular service
+                carServices.pauseCar();
+
                 console.log('video is paused');
             }
         }

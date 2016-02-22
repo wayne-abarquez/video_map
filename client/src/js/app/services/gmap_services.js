@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('demoApp')
-        .factory('gmapServices', [gmapServices]);
+        .factory('gmapServices', ['GMAP_STYLES', gmapServices]);
 
-    function gmapServices() {
+    function gmapServices(GMAP_STYLES) {
         var service = {};
 
         //infowindow balloons
@@ -80,7 +80,7 @@
         service.computeBearing = computeBearing;
         service.initCanvasMarker = initCanvasMarker;
         service.castToLatLngObject = castToLatLngObject;
-
+        service.applyMapStyle = applyMapStyle;
         //service.initDirectionsService = initDirectionsService;
 
         function apiAvailable() {
@@ -119,6 +119,9 @@
                 google.maps.event.trigger(service.map, 'resize');
                 service.map.setCenter(center);
             });
+
+            // apply map styles
+            //service.applyMapStyle(GMAP_STYLES);
 
             return service.map;
         }
@@ -320,8 +323,8 @@
 
             var lineSymbol = {
                 path: 'M 0,-1 0,1',
-                strokeOpacity: 1,
-                scale: 1
+                strokeOpacity: 0.3,
+                scale: 2
             };
 
             var polylineOptions = {
@@ -334,7 +337,7 @@
                 icons: [{
                     icon: lineSymbol,
                     offset: '0',
-                    repeat: '3px'
+                    repeat: '15px'
                 }],
                 strokeOpacity: 0,
                 zIndex: 100
@@ -413,6 +416,10 @@
 
         function castToLatLngObject (latLngLiteral) {
             return new google.maps.LatLng(latLngLiteral);
+        }
+
+        function applyMapStyle (mapStyles) {
+            service.map.setOptions({styles: mapStyles});
         }
 
         //function initDirectionsService () {
