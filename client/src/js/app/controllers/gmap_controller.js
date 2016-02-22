@@ -23,22 +23,23 @@ angular.module('demoApp')
         }
 
         function tripCompletedCallback (event, param) {
-            alertServices.showReplayVideoPrompt(param.message, function () {
-                carServices.resetCar();
-                carServices.accelerate();
-                $rootScope.$broadcast('reset-video');
-            });
+            alertServices.showTripCompleted(param.message);
+            //alertServices.showReplayVideoPrompt(param.message, function () {
+            //    carServices.resetCar();
+            //    carServices.accelerate();
+            //    $rootScope.$broadcast('reset-video');
+            //});
         }
 
         function videoStateChanged (event, param) {
             if(param.state === VG_STATES.PLAY) {
                 // angular service
                 carServices.startCar();
-                console.log('video is played');
+                //console.log('video is played');
             } else {
                 // angular service
                 carServices.pauseCar();
-                console.log('video is paused');
+                //console.log('video is paused');
             }
         }
 

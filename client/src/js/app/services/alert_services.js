@@ -8,6 +8,7 @@ angular.module('demoApp')
         var service = {};
 
         service.showReplayVideoPrompt = showReplayVideoPrompt;
+        service.showTripCompleted = showTripCompleted;
 
         function showReplayVideoPrompt (message, replayCallback) {
             SweetAlert.swal({
@@ -23,6 +24,11 @@ angular.module('demoApp')
                     replayCallback();
                 });
         }
+
+        function showTripCompleted (distance) {
+            SweetAlert.swal("Trip Completed!", distance);
+        }
+
 
         return service;
     }
