@@ -23,10 +23,11 @@ gulp.task('vendor-scripts', function () {
         paths.srcLibJs + '/canvas_marker.js',
         paths.bower + '/videogular/videogular.min.js',
         paths.bower + '/videogular-controls/vg-controls.min.js',
-        paths.bower + '/videogular-buffering/vg-buffering.min.js'
+        paths.bower + '/videogular-buffering/vg-buffering.min.js',
+        paths.bower + '/videogular-overlay-play/vg-overlay-play.min.js'
     ])
         .pipe($.concat('vendor.min.js'))
-        //.pipe($.uglify({mangle: false}).on('error', $.util.log))
+        .pipe($.uglify({mangle: false}).on('error', $.util.log))
         .pipe(gulp.dest(paths.destJs + '/'))
         .pipe($.size());
 });
@@ -36,7 +37,7 @@ gulp.task('jq-scripts', function () {
        .pipe($.eslint())
        .pipe($.eslint.format())
        .pipe($.concat('app-jq.min.js'))
-       //.pipe($.uglify())
+       .pipe($.uglify())
        .pipe(gulp.dest(paths.destJs + '/'))
        .pipe($.size());
 });
@@ -48,7 +49,7 @@ gulp.task('app-scripts', ['jq-scripts'], function () {
         .pipe($.ngAnnotate())
         .pipe($.angularFilesort())
         .pipe($.concat('app.min.js'))
-        //.pipe($.uglify().on('error', $.util.log))
+        .pipe($.uglify().on('error', $.util.log))
         .pipe(gulp.dest(paths.destJs + '/'))
         .pipe($.size());
 });

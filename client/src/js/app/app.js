@@ -9,7 +9,8 @@
             'oitozero.ngSweetAlert',
             'treasure-overlay-spinner',
             'com.2fdevs.videogular',
-            'com.2fdevs.videogular.plugins.controls'
+            'com.2fdevs.videogular.plugins.controls',
+            'com.2fdevs.videogular.plugins.overlayplay'
         ])
 
         .constant('BASE_URL', window.location.origin)

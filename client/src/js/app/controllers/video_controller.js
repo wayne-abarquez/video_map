@@ -7,7 +7,6 @@ angular.module('demoApp')
     function videoController ($rootScope, $sce, carServices) {
         var vm = this;
 
-        vm.secondsElapsed = 0
         var time = 0;
 
         var videoPath = 'videos/tiz-20160125-101958.mp4';
@@ -32,21 +31,33 @@ angular.module('demoApp')
         vm.updateState = updateState;
         vm.updateTime = updateTime;
 
+        vm.onPlayerReady = onPlayerReady;
+
         vm.initialize();
 
         function initialize () {
             window.onresize = function () {
                 $('#video-canvas').height($(window).height() - (42));
             };
+
+            $rootScope.$on('reset-video', resetVideo);
+        }
+
+        function onPlayerReady(API) {
+            vm.API = API;
         }
 
         function updateState (state) {
             $rootScope.$broadcast('video-player-state-changed', {state: state});
         }
 
-        function updateTime (rawTime) {
-            vm.secondsElapsed = rawTime;
+        function resetVideo () {
+            //console.log('resetting video');
+            vm.API.seekTime(0);
+            vm.API.play();
+        }
 
+        function updateTime (rawTime) {
             time = rawTime.toFixed(1);
 
             console.log('Time: ',time);
@@ -101,7 +112,7 @@ angular.module('demoApp')
                 carServices.changeSpeed(100);
             }
 
-            else if (time > 84.8 && time < 85.5) {
+            else if (time > 84.3 && time < 85.5) {
                 console.log('slowing down');
                 carServices.changeSpeed(300);
             }
@@ -111,35 +122,35 @@ angular.module('demoApp')
                 carServices.pauseCar();
             }
 
-            else if (time > 85.8 && time < 94.3) {
+            else if (time > 85.8 && time < 94) {
                 console.log('first accelerate after stop light');
-                carServices.accelerate(90);
+                carServices.accelerate(100);
             }
 
-            else if (time > 94.3 && time < 121.5) {
+            else if (time > 94 && time < 121.3) {
                 console.log('second stop on stop light');
                 carServices.pauseCar();
             }
 
-            else if (time > 121.5 && time < 130.5) {
+            else if (time > 121.3 && time < 131) {
                 console.log('second accelerate after stop light');
-                carServices.accelerate(100);
+                carServices.accelerate(110);
             }
 
 
-            else if (time > 130.5 && time < 133) {
+            else if (time > 131 && time < 133.4) {
                 console.log('third stop on stop light');
                 carServices.pauseCar();
 
                 // first stop before samsung
             }
 
-            else if (time > 133 && time < 140.5) {
+            else if (time > 133.4 && time < 141.2) {
                 console.log('third accelerate after stop light');
-                carServices.accelerate(120);
+                carServices.accelerate(100);
             }
 
-            else if (time > 140.5 && time < 160) {
+            else if (time > 141.2 && time < 160) {
                 console.log('fourth stop on stop light');
                 carServices.pauseCar();
 

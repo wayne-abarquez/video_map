@@ -2,9 +2,9 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('gmapController', ['$rootScope', 'carServices', 'gmapServices', gmapController]);
+    .controller('gmapController', ['$rootScope', 'VG_STATES', 'carServices', 'gmapServices', 'alertServices', gmapController]);
 
-    function gmapController($rootScope, carServices, gmapServices) {
+    function gmapController($rootScope, VG_STATES, carServices, gmapServices, alertServices) {
 
         var vm = this;
 
@@ -19,17 +19,25 @@ angular.module('demoApp')
             carServices.initialize();
 
             $rootScope.$on('video-player-state-changed', videoStateChanged);
+            $rootScope.$on('trip-completed', tripCompletedCallback);
+        }
+
+        function tripCompletedCallback (event, param) {
+            alertServices.showReplayVideoPrompt(param.message, function () {
+                carServices.resetCar();
+                carServices.accelerate();
+                $rootScope.$broadcast('reset-video');
+            });
         }
 
         function videoStateChanged (event, param) {
-            if(param.state === 'play') {
+            if(param.state === VG_STATES.PLAY) {
                 // angular service
                 carServices.startCar();
                 console.log('video is played');
             } else {
                 // angular service
                 carServices.pauseCar();
-
                 console.log('video is paused');
             }
         }
