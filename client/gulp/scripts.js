@@ -49,7 +49,7 @@ gulp.task('app-scripts', ['jq-scripts'], function () {
         .pipe($.ngAnnotate())
         .pipe($.angularFilesort())
         .pipe($.concat('app.min.js'))
-        .pipe($.uglify({mangle: false}).on('error', $.util.log))
+        .pipe($.uglify({mangle: true}).on('error', $.util.log))
         .pipe(gulp.dest(paths.destJs + '/'))
         .pipe($.size());
 });
