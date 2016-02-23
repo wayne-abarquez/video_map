@@ -29,10 +29,10 @@ gulp.task('clean', function (done) {
     $.del(
         [
             paths.destImages + '/',
-            paths.destFonts  + '/',
-            paths.destCss    + '/',
-            paths.destJs     + '/',
-            paths.tmp        + '/'
+            paths.destFonts + '/',
+            paths.destCss + '/',
+            paths.destJs + '/',
+            paths.tmp + '/'
         ]
         , done);
 });

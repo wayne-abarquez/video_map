@@ -17,7 +17,7 @@ angular.module('demoApp')
         //vm.initialize();
 
         function initialize() {
-            console.log('initialize called');
+            //console.log('initialize called');
         }
     }
 }());

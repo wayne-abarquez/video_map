@@ -60,16 +60,23 @@ angular.module('demoApp')
         function updateTime (rawTime) {
             time = rawTime.toFixed(1);
 
-            //console.log('Time: ',time);
+          //console.log('Time: ',time);
 
-
-            if(time > 4.5 && time < 6) {
-                carServices.pauseCar();
-                carServices.accelerateCarAfter(4000);
-            } else if(time > 6 && time < 13) {
-                carServices.slowDown(300);
+            if(time >= 4 && time < 4.8) {
+                carServices.slowDown(200);
             }
-            else if (time > 14 && time < 20) {
+            else if (time >= 4.8 && time < 5.5) {
+                //console.log('is paused');
+                carServices.pauseCar();
+            }
+            else if (time > 5.5 && time < 8.5) {
+                //console.log('on accelerate');
+                carServices.accelerate(300);
+            }
+            else if (time > 8.5 && time < 17) {
+                carServices.changeSpeed(150);
+            }
+            else if(time > 17 && time < 28.5) {
                 carServices.changeSpeed(90);
             }
             else if (time > 28.5 && time < 31.5) {
@@ -171,7 +178,7 @@ angular.module('demoApp')
 
             else if (time > 168 && time < 174) {
                 //console.log('fifth accelerate after stop light');
-                carServices.accelerate(80);
+                carServices.accelerate(70);
             }
         }
 

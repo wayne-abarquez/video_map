@@ -33,13 +33,13 @@ gulp.task('vendor-scripts', function () {
 });
 
 gulp.task('jq-scripts', function () {
-   return gulp.src(paths.srcJs + '/app_jq.js')
-       .pipe($.eslint())
-       .pipe($.eslint.format())
-       .pipe($.concat('app-jq.min.js'))
-       .pipe($.uglify())
-       .pipe(gulp.dest(paths.destJs + '/'))
-       .pipe($.size());
+    return gulp.src(paths.srcJs + '/app_jq.js')
+        .pipe($.eslint())
+        .pipe($.eslint.format())
+        .pipe($.concat('app-jq.min.js'))
+        .pipe($.uglify({mangle: true}))
+        .pipe(gulp.dest(paths.destJs + '/'))
+        .pipe($.size());
 });
 
 gulp.task('app-scripts', ['jq-scripts'], function () {
@@ -49,9 +49,20 @@ gulp.task('app-scripts', ['jq-scripts'], function () {
         .pipe($.ngAnnotate())
         .pipe($.angularFilesort())
         .pipe($.concat('app.min.js'))
-        .pipe($.uglify().on('error', $.util.log))
+        .pipe($.uglify({mangle: true}).on('error', $.util.log))
         .pipe(gulp.dest(paths.destJs + '/'))
         .pipe($.size());
 });
 
-gulp.task('scripts', ['vendor-scripts', 'app-scripts']);
+gulp.task('login-scripts', function () {
+    return gulp.src([paths.srcLibJs + '/login.js',])
+        .pipe($.eslint())
+        .pipe($.eslint.format())
+        .pipe($.ngAnnotate())
+        .pipe($.concat('login.min.js'))
+        .pipe($.uglify({mangle: true}).on('error', $.util.log))
+        .pipe(gulp.dest(paths.destJs + '/'))
+        .pipe($.size());
+});
+
+gulp.task('scripts', ['vendor-scripts', 'app-scripts', 'login-scripts']);

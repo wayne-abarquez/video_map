@@ -2,25 +2,17 @@
     'use strict';
 
     angular
-        .module('demoApp', [
+        .module('demo.authentication', [
             'ngSanitize',
             'ngMaterial',
             'ngAnimate',
-            'oitozero.ngSweetAlert',
-            'treasure-overlay-spinner',
-            'com.2fdevs.videogular',
-            'com.2fdevs.videogular.plugins.controls',
-            'com.2fdevs.videogular.plugins.buffering',
-            'com.2fdevs.videogular.plugins.overlayplay'
+            'oitozero.ngSweetAlert'
         ])
-
         .constant('BASE_URL', window.location.origin)
         .config(function ($mdThemingProvider) {
             $mdThemingProvider.theme('default')
                 .primaryPalette('red')
                 .accentPalette('pink');
         });
-
-    //console.log('demo app initialized!');
 
 }());

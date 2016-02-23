@@ -12,7 +12,7 @@ browserSync({
     proxy: "127.0.0.1:82"
 });
 
-gulp.task('watch', function(event) {
+gulp.task('watch', function (event) {
     // Watch HTML Files
     gulp.watch(paths.templates + '/**/*.html',
         function (event) {

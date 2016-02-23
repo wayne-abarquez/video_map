@@ -18,15 +18,15 @@ gulp.task('sass', function () {
 });
 
 gulp.task('vendor-css', function () {
-   return gulp.src([
-       paths.bower + '/angular-material/angular-material.min.css',
-       paths.bower + '/sweetalert/dist/sweetalert.css',
-       paths.bower + '/angular-treasure-overlay-spinner/dist/treasure-overlay-spinner.min.css',
-       paths.bower + '/videogular-themes-default/videogular.min.css'
-   ])
-       .pipe($.concatCss('vendor.min.css'))
-       .pipe($.csso())
-       .pipe(gulp.dest(paths.destCss + '/'));
+    return gulp.src([
+        paths.bower + '/angular-material/angular-material.min.css',
+        paths.bower + '/sweetalert/dist/sweetalert.css',
+        paths.bower + '/angular-treasure-overlay-spinner/dist/treasure-overlay-spinner.min.css',
+        paths.bower + '/videogular-themes-default/videogular.min.css'
+    ])
+        .pipe($.concatCss('vendor.min.css'))
+        .pipe($.csso())
+        .pipe(gulp.dest(paths.destCss + '/'));
 });
 
 gulp.task('styles', ['sass', 'vendor-css']);

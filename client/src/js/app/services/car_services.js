@@ -29,7 +29,7 @@ angular.module('demoApp')
 
         service.isPaused = false;
         // force pause
-        //service.paused_ = false;
+        service.paused_ = false;
 
         service.initialize = initialize;
         service.runCar = runCar;
@@ -76,7 +76,7 @@ angular.module('demoApp')
         function runCar (distance) {
             //console.log('run car: ',distance);
 
-            if( !service.isPaused) { // && !service.paused_
+            if( !service.isPaused && !service.paused_) {
                 var point = polyline.GetPointAtDistance(distance);
 
                 if (distance > eol || !point) {
@@ -121,7 +121,7 @@ angular.module('demoApp')
         }
 
         function startCar () {
-            if(service.isPaused) {
+            if(service.isPaused || service.paused_) {
                 accelerateCar();
                 return;
             }
@@ -141,17 +141,14 @@ angular.module('demoApp')
         }
 
         function accelerateCar () {
-            $timeout(function(){
-                changeSpeed(100);
-            }, 10000);
-
             service.isPaused = false;
+            service.paused_ = false;
         }
 
-        function pauseCar () {
-            //changeSpeed(200);
+        function pauseCar (forcePause) {
+            if(forcePause) service.paused_ = true;
+
             service.isPaused = true;
-            //service.paused_ = true;
         }
 
         function slowDown(speed) {
