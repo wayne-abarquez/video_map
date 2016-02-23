@@ -22,7 +22,7 @@ angular.module('demoApp')
             plugins: {
                 controls: {
                     autoHide: true,
-                    autoHideTime: 2000
+                    autoHideTime: 1000
                 }
             }
         };

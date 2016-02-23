@@ -1,0 +1,30 @@
+CACHE MANIFEST
+# 2016-2-23:v1
+
+CACHE:
+/index
+
+/js/app.min.js
+/js/vendor.min.js
+/js/app-jq.min.js
+
+/css/app.min.css
+/css/vendor.min.css
+
+/videogular-themes-default/fonts/videogular.dev.svg
+/videogular-themes-default/fonts/videogular.eot
+/videogular-themes-default/fonts/videogular.svg
+/videogular-themes-default/fonts/videogular.ttf
+/videogular-themes-default/fonts/videogular.woff
+
+/images/favicon.ico
+/images/markers/caricon.png
+/images/login-bg.png
+/images/navagis_powered.png
+/images/companylogo.png
+/images/default-avatar.png
+
+NETWORK:
+*
+
+FALLBACK:

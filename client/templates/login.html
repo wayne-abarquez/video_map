@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="demo.authentication">
+<html ng-app="demo.authentication" manifest="/manifest.appcache">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
@@ -24,12 +24,12 @@
                 <md-card class="md-red-theme">
                     <md-toolbar layout-align="center center">
                         <div flex="100" layout-align="center center">
-                            <img ng-src="/resources/images/companylogo.png" alt="" style="margin-top: 20px;max-height: 60px;">
+                            <img ng-src="/images/companylogo.png" class="login-company-logo" alt="">
                         </div>
 
                         <div class="padding-20 text-center">
                             <!--<h1 class="md-headline">Solar Site Acquisition Repository</h1>-->
-                            <div style="text-align:center;"><img class="avatar" src="/resources/images/default-avatar.png" alt=""/></div>
+                            <div class="login-avatar-container"><img class="avatar" src="/images/default-avatar.png" alt=""/></div>
                             <p>Please Sign in to continue</p>
                         </div>
                     </md-toolbar>
@@ -54,7 +54,7 @@
 {% raw %}
                             <md-input-container layout="row">
                                 <label for="username">Username</label>
-                                <input id="username"   label="username" name="username" type="text" required/>
+                                <input id="username" label="username" name="username" type="text" required/>
                                 <div ng-messages="login.email.$error" ng-if="login.email.$dirty">
                                     <div ng-message when="required"><span>Please Enter Username</span></div>
                                 </div>
@@ -68,10 +68,8 @@
                             </md-input-container>
 
                             <div layout="row" layout-align="end end">
-
-                                <md-button class="md-raised md-primary" type="submit" style="width:100%;">Sign in</md-button>
+                                <md-button class="md-raised md-primary signin-button" type="submit">Sign in</md-button>
                             </div>
-
                         </form>
 
                     </md-content>
@@ -79,7 +77,7 @@
 {% endraw %}
                 <footer>
                   <a href="http://www.navagis.com">
-                      <img ng-src="/resources/images/navagis_powered.png" target="_new" alt=""/>
+                      <img ng-src="/images/navagis_powered.png" target="_new" alt=""/>
                   </a>
                 </footer>
             </div>

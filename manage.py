@@ -33,5 +33,15 @@ def create_test_users():
     print "Created test user"
 
 
+@manager.command
+def create_admin_user():
+    u = models.User()
+    u.username = 'admin'
+    u.password = 'password123'
+    db.session.add(u)
+    db.session.commit()
+    print "Created Navagis user"
+
+
 if __name__ == '__main__':
     manager.run()
