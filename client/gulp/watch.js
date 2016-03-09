@@ -9,7 +9,9 @@ var runSequence = require('run-sequence');
 
 browserSync({
     notify: true,
-    proxy: "127.0.0.1:82"
+    proxy: "localhost:9000",
+    reloadDelay: 500,
+    injectChanges: true
 });
 
 gulp.task('watch', function (event) {

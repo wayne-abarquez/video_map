@@ -22,10 +22,11 @@ angular.module('demoApp')
             plugins: {
                 controls: {
                     autoHide: true,
-                    autoHideTime: 1000
+                    autoHideTime: 500
                 }
             }
         };
+
 
         vm.initialize = initialize;
         vm.updateState = updateState;
