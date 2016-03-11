@@ -2,9 +2,9 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('gmapController', ['$rootScope', 'VG_STATES', 'carServices', 'gmapServices', 'alertServices', gmapController]);
+    .controller('gmapController', ['$rootScope', 'carServices', 'gmapServices', 'alertServices', gmapController]);
 
-    function gmapController($rootScope, VG_STATES, carServices, gmapServices, alertServices) {
+    function gmapController($rootScope, carServices, gmapServices, alertServices) {
 
         var vm = this;
 
@@ -18,7 +18,7 @@ angular.module('demoApp')
             // angular service
             carServices.initialize();
 
-            $rootScope.$on('video-player-state-changed', videoStateChanged);
+            //$rootScope.$on('video-player-state-changed', videoStateChanged);
             $rootScope.$on('trip-completed', tripCompletedCallback);
         }
 
@@ -31,17 +31,17 @@ angular.module('demoApp')
             //});
         }
 
-        function videoStateChanged (event, param) {
-            if(param.state === VG_STATES.PLAY) {
-                // angular service
-                carServices.startCar();
-                //console.log('video is played');
-            } else {
-                // angular service
-                carServices.pauseCar(true);
-                //console.log('video is paused');
-            }
-        }
+        //function videoStateChanged (event, param) {
+        //    if(param.state === VG_STATES.PLAY) {
+        //        // angular service
+        //        carServices.startCar();
+        //        //console.log('video is played');
+        //    } else {
+        //        // angular service
+        //        carServices.pauseCar(true);
+        //        //console.log('video is paused');
+        //    }
+        //}
 
     }
 }());

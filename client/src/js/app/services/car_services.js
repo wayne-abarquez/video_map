@@ -11,7 +11,7 @@
 
         var polyline = null,
             polylinePath = []
-            ;
+        ;
 
         var img = new Image();
         img.src = CAR_ICON;
@@ -20,19 +20,19 @@
             k = 0,
             step = 5,
             angle = 0
-            ;
+        ;
 
         service.distanceCovered = 0
 
-        service.carPath = extractCoordsArray(CAR_PATH);
+        service.carPath = CAR_PATH;
 
         var startCoord = new google.maps.LatLng(service.carPath[0]);
 
         service.defaultSpeed = 100;
 
         service.lastVertex = 0;
-        service.speed = 100,
-            service.car = null;
+        service.speed = 100;
+        service.car = null;
 
         service.isPaused = false;
         // force pause
@@ -64,7 +64,6 @@
             gmapServices.addMapListener('click', function (event) {
                 console.log('Click Position: ', event.latLng.toJSON());
             });
-
 
             gmapServices.addListener(polyline, 'click', function (e) {
                 console.log('Polyline clicked: ', e.latLng.toJSON());
@@ -132,7 +131,7 @@
                 //console.log("Miles: " + (distance / 1609.344).toFixed(2) + service.speed);
 
                 if (polyline.GetIndexAtDistance(distance) > service.lastVertex) {
-                    console.log('last vertex: ', service.lastVertex);
+                    //console.log('last vertex: ', service.lastVertex);
                     service.lastVertex = polyline.GetIndexAtDistance(distance);
 
                     if (service.lastVertex == polylinePath.length) {
