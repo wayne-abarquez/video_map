@@ -90,3 +90,9 @@
 2016-02-26 14:47:38,661 INFO - run.py <module>: Starting app
 2016-03-09 11:42:14,594 INFO - __init__.py <module>: Will output log to /var/www/video_map/logs/app.log
 2016-03-09 11:42:14,932 INFO - run.py <module>: Starting app
+2016-03-09 13:25:05,563 INFO - __init__.py <module>: Will output log to /var/www/video_map/logs/app.log
+2016-03-09 13:25:06,149 INFO - run.py <module>: Starting app
+2016-03-09 15:31:02,673 INFO - __init__.py <module>: Will output log to /var/www/video_map/logs/app.log
+2016-03-09 15:31:03,037 INFO - run.py <module>: Starting app
+2016-03-11 13:56:37,396 INFO - __init__.py <module>: Will output log to /var/www/video_map/logs/app.log
+2016-03-11 13:56:38,007 INFO - run.py <module>: Starting app

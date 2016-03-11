@@ -34,7 +34,7 @@ angular.module('demoApp')
         function videoStateChanged (event, param) {
             if(param.state === VG_STATES.PLAY) {
                 // angular service
-                carServices.startCar(true);
+                carServices.startCar();
                 //console.log('video is played');
             } else {
                 // angular service

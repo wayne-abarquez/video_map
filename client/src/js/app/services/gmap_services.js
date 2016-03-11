@@ -81,7 +81,7 @@
         service.initCanvasMarker = initCanvasMarker;
         service.castToLatLngObject = castToLatLngObject;
         service.applyMapStyle = applyMapStyle;
-        //service.initDirectionsService = initDirectionsService;
+        service.initDirectionsService = initDirectionsService;
 
         function apiAvailable() {
             return typeof window.google === 'object';
@@ -422,10 +422,45 @@
             service.map.setOptions({styles: mapStyles});
         }
 
-        //function initDirectionsService () {
-        //    service.directionsService = new google.maps.DirectionsService();
-        //    service.directionsDisplay = new google.maps.DirectionsRenderer();
-        //}
+        function initDirectionsService () {
+            service.directionsService = new google.maps.DirectionsService();
+            service.directionsDisplay = new google.maps.DirectionsRenderer();
+
+            service.directionsDisplay.setMap(service.map);
+        }
+
+        service.getDirections = getDirections;
+        service.waypoint = [];
+
+        $(window).keypress(function (e) {
+            console.log('key press: ', e.keyCode);
+
+            if (e.keyCode == 32) { // SPACE
+                service.waypoint = [{location: {"lat": 37.41096261262822, "lng": -121.92425787448883}, stopover: false}];
+            }
+        });
+
+        function getDirections(origin, dest) {
+            console.log('waypoints: ', service.waypoint);
+
+            service.directionsService.route({
+                origin: origin,
+                destination: dest,
+                travelMode: google.maps.TravelMode.DRIVING,
+                waypoints: service.waypoint,
+                optimizeWaypoints: true
+            }, function(response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    console.log('Directions Service resp: ', response);
+                    service.directionsDisplay.setDirections(response);
+                    var distance = google.maps.geometry.spherical.computeLength(response.routes[0].overview_path);
+                    console.log('Distance: ',distance);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+                service.waypoint = [];
+            });
+        }
 
         return service;
     }

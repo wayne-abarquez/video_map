@@ -2,9 +2,9 @@
 'use strict';
 
 angular.module('demoApp')
-    .controller('videoController', ['$rootScope', '$sce', 'carServices', videoController]);
+    .controller('videoController', ['$rootScope', '$sce', 'CAR_TIME_DISTANCE', 'carServices', videoController]);
 
-    function videoController ($rootScope, $sce, carServices) {
+    function videoController ($rootScope, $sce, CAR_TIME_DISTANCE, carServices) {
         var vm = this;
 
         var time = 0;
@@ -26,7 +26,6 @@ angular.module('demoApp')
                 }
             }
         };
-
 
         vm.initialize = initialize;
         vm.updateState = updateState;
@@ -53,7 +52,6 @@ angular.module('demoApp')
         }
 
         function resetVideo () {
-            ////console.log('resetting video');
             vm.API.seekTime(0);
             vm.API.play();
         }
@@ -61,7 +59,32 @@ angular.module('demoApp')
         function updateTime (rawTime) {
             time = rawTime.toFixed(1);
 
-          //console.log('Time: ',time);
+            console.log('Elapsed Time: ', time);
+            console.log('Distance Covered: ', carServices.distanceCovered);
+
+            //try {
+            //    carTime = CAR_TIME_DISTANCE[time];
+            //
+            //    if(carTime.distance) {
+            //        distance = carTime.distance;
+            //        carServices.distanceCovered = distance;
+            //    }
+            //
+            //    if(carTime.stop) {
+            //        carServices.pauseCar();
+            //    } else {
+            //        carServices.resumeCar();
+            //    }
+            //
+            //    //carServices.speed = carTime.speed
+            //    //                    ? carTime.speed
+            //    //                    : carServices.defaultSpeed;
+            //    //console.log('Time: ' + time + ' Car Distance: ' + distance);
+            //
+            //} catch(err){
+            //    distance = 0;
+            //    carServices.resumeCar();
+            //}
 
             if(time >= 4 && time < 4.8) {
                 carServices.slowDown(200);
