@@ -20,8 +20,56 @@ function CanvasMarker(opts) {
 CanvasMarker.prototype = new google.maps.OverlayView();
 
 CanvasMarker.prototype.onAdd = function() {
+  var that = this;
+  var overlayProjection = this.getProjection();
+
   var div = document.createElement('div');
-      div.style.position = 'absolute';
+  div.style.position = 'absolute';
+  div.draggable = true;
+
+
+  google.maps.event.addDomListener(this.get('map').getDiv(),
+      'mouseleave',
+      function () {
+        google.maps.event.trigger(div, 'mouseup');
+      }
+  );
+
+  google.maps.event.addDomListener(div,
+    'mousedown',
+    function (e) {
+      this.style.cursor = 'move';
+      that.map.set('draggable', false);
+      that.set('origin', e);
+
+      if( !that.moveHandler) {
+          that.moveHandler = google.maps.event.addDomListener(that.get('map').getDiv(),
+              'mousemove',
+              function (e) {
+                var origin = that.get('origin'),
+                    left = origin.clientX - e.clientX,
+                    top = origin.clientY - e.clientY,
+                    pos = overlayProjection.fromLatLngToDivPixel(that.point),
+                    latLng = overlayProjection.fromDivPixelToLatLng(new google.maps.Point(pos.x - left,
+                            pos.y - top));
+                that.set('origin', e);
+                that.set('point', latLng);
+                that.draw();
+              });
+      }
+    }
+  );
+  /* End of mousedown listener */
+
+  google.maps.event.addDomListener(div, 'mouseup', function () {
+    that.map.set('draggable', true);
+    this.style.cursor = 'default';
+    google.maps.event.removeListener(that.moveHandler);
+
+    that.moveHandler = null;
+  });
+  /* End of mouseup listener */
+
 
   div.appendChild(this.canvas_);
   this.div_ = div;
@@ -48,6 +96,8 @@ CanvasMarker.prototype.plot = function(angle) {
   var cosa = Math.cos(angle);
   var sina = Math.sin(angle);
 
+    //console.log('Setting Car Angle: ', angle);
+
   this.context_.clearRect(0,0,32,32);
   this.context_.save();
   this.context_.rotate(angle);
@@ -59,4 +109,13 @@ CanvasMarker.prototype.plot = function(angle) {
 CanvasMarker.prototype.setPoint = function(point) {
   this.point = point;
   this.draw();
+}
+
+CanvasMarker.prototype.setPosition = function (point) {
+    this.point = point;
+    this.draw();
+}
+
+CanvasMarker.prototype.getPosition = function () {
+    return this.point;
 }
