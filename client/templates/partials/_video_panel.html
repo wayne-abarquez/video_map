@@ -4,7 +4,8 @@
         vg-theme="vidCtl.config.theme.url"
         vg-player-ready="vidCtl.onPlayerReady($API)"
         vg-update-time="vidCtl.updateTime($currentTime)"
-        vg-update-state="vidCtl.updateState($state)">
+        vg-update-state="vidCtl.updateState($state)"
+        vg-seeking="vidCtl.seekTime($currentTime)">
 
             <vg-media vg-src="vidCtl.config.sources"></vg-media>
 

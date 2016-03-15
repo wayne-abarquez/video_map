@@ -18,7 +18,6 @@ angular.module('demoApp')
             // angular service
             carServices.initialize();
 
-            //$rootScope.$on('video-player-state-changed', videoStateChanged);
             $rootScope.$on('trip-completed', tripCompletedCallback);
         }
 
@@ -30,18 +29,5 @@ angular.module('demoApp')
             //    $rootScope.$broadcast('reset-video');
             //});
         }
-
-        //function videoStateChanged (event, param) {
-        //    if(param.state === VG_STATES.PLAY) {
-        //        // angular service
-        //        carServices.startCar();
-        //        //console.log('video is played');
-        //    } else {
-        //        // angular service
-        //        carServices.pauseCar(true);
-        //        //console.log('video is paused');
-        //    }
-        //}
-
     }
 }());

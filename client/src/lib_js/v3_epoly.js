@@ -234,6 +234,31 @@ google.maps.Polygon.prototype.Bearing = function(v1,v2) {
 }
 
 
+// === A method which returns an array of GLatLngs of points a given interval along the path ===
+google.maps.Polyline.prototype.GetDistanceAtPoint = function (point) {
+  var dist = 0;
+  var paths = this.getPath().getArray();
+  var points = [];
+
+  paths.forEach( function(latlng, index){
+    dist = google.maps.geometry.spherical.computeDistanceBetween(latlng, point);
+    points.push({
+      distance: dist,
+      index: index
+    });
+  });
+
+  var sortedPoints = _.sortBy(points, 'distance');
+  var closestPathIndex = sortedPoints[0].index;
+
+  var distance = google.maps.geometry.spherical.computeLength(paths.slice(0, closestPathIndex+1));
+
+  //console.log('Computed Distance: ',distance);
+
+  return distance;
+}
+
+
 
 
 // === Copy all the above functions to GPolyline ===

@@ -11,13 +11,5 @@ angular.module('demoApp')
         $rootScope.spinner = {
             active: false
         };
-
-        vm.initialize = initialize;
-
-        //vm.initialize();
-
-        function initialize() {
-            //console.log('initialize called');
-        }
     }
 }());

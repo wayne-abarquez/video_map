@@ -9,9 +9,10 @@ angular.module('demoApp')
 
         var videoPath = 'videos/tiz-20160125-101958.mp4',
             time = 0,
-            carTime = 0,
-            distance = 0
+            carTime = 0
         ;
+
+        var pathDistance = {};
 
         vm.config = {
             sources: [
@@ -31,6 +32,7 @@ angular.module('demoApp')
 
         vm.initialize = initialize;
         vm.updateState = updateState;
+        vm.seekTime = seekTime;
         vm.updateTime = updateTime;
         vm.onPlayerReady = onPlayerReady;
 
@@ -41,13 +43,25 @@ angular.module('demoApp')
                 $('#video-canvas').height($(window).height() - (42));
             };
 
+            // Listen for Reset Video Event
             $rootScope.$on('reset-video', resetVideo);
 
             // play / pause when SPACE pressed
             $(window).keypress(function (e) {
                 if (e.keyCode == 32) vm.API.playPause();
+                else if(e.keyCode == 13) {
+                    console.log('Path Distance: ', JSON.stringify(pathDistance));
+                }
             });
 
+            // Listens event when marker is dragged on the path
+            $rootScope.$on('seek-video-time', function(event, params){
+                //console.log('Seek Video Time Event Triggered!');
+                var time = params.time;
+                vm.API.seekTime(time);
+            });
+
+            // Pause/Resume video during buffering event
             $scope.$watch(function(){
                 return vm.API.isBuffering;
             }, function (newValue, oldValue) {
@@ -62,21 +76,15 @@ angular.module('demoApp')
 
         function onPlayerReady(API) {
             vm.API = API;
-
-            console.log('API: ',vm.API);
+            //console.log('API: ',vm.API);
         }
 
         function updateState (state) {
             if (state === VG_STATES.PLAY) {
-                // angular service
                 carServices.startCar();
-                //console.log('video is played');
             } else {
-                // angular service
                 carServices.pauseCar(true);
-                //console.log('video is paused');
             }
-            //$rootScope.$broadcast('video-player-state-changed', {state: state});
         }
 
         function resetVideo () {
@@ -84,38 +92,48 @@ angular.module('demoApp')
             vm.API.play();
         }
 
+        function getDistanceByTime(time) {
+            try {
+                //console.log('get distance by time: ', time);
+                var carTime = CAR_TIME_DISTANCE[time];
+                return carTime.distance;
+            } catch (err) {
+                var curTime = parseFloat(time);
+                curTime += 0.1;
+                curTime = curTime.toFixed(1);
+                return getDistanceByTime(curTime.toString());
+            }
+        }
+
+        function seekTime(value) {
+            var seekTime = value.toFixed(1);
+
+            //console.log('Seek time: ',seekTime);
+            carServices.lastVertex = 0;
+
+            carServices.distanceCovered = getDistanceByTime(seekTime)
+            updateTime(value);
+
+            //carServices.lastVertex = -1;
+            carServices.plotCar(carServices.distanceCovered);
+            carServices.processAngle(carServices.distanceCovered);
+        }
+
         function updateTime (rawTime) {
             time = rawTime.toFixed(1);
 
-            console.log('Elapsed Time: ', time);
-            console.log('Distance Covered: ', carServices.distanceCovered);
-
+            //console.log('Elapsed Time: ', time);
+            //console.log('Distance Covered: ', carServices.distanceCovered);
             try {
                 carTime = CAR_TIME_DISTANCE[time];
 
                 if(carTime.distance) {
                     if(carTime.distance < carServices.distanceCovered) {
-                        distance = carTime.distance;
-                        carServices.distanceCovered = distance;
-                        console.log('setting distance');
+                        carServices.distanceCovered = carTime.distance;
+                        //console.log('setting distance');
                     }
                 }
-
-                //if(carTime.stop) {
-                //    carServices.pauseCar();
-                //} else {
-                //    carServices.resumeCar();
-                //}
-
-                //carServices.speed = carTime.speed
-                //                    ? carTime.speed
-                //                    : carServices.defaultSpeed;
-                //console.log('Time: ' + time + ' Car Distance: ' + distance);
-
-            } catch(err){
-                //distance = 0;
-                //carServices.resumeCar();
-            }
+            } catch(err){}
 
             if(time >= 4 && time < 4.8) {
                 carServices.slowDown(200);

@@ -433,7 +433,7 @@
         service.waypoint = [];
 
         $(window).keypress(function (e) {
-            console.log('key press: ', e.keyCode);
+            //console.log('key press: ', e.keyCode);
 
             if (e.keyCode == 32) { // SPACE
                 service.waypoint = [{location: {"lat": 37.41096261262822, "lng": -121.92425787448883}, stopover: false}];
@@ -441,7 +441,7 @@
         });
 
         function getDirections(origin, dest) {
-            console.log('waypoints: ', service.waypoint);
+            //console.log('waypoints: ', service.waypoint);
 
             service.directionsService.route({
                 origin: origin,

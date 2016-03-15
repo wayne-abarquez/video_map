@@ -23,13 +23,15 @@ gulp.task('vendor-scripts', function () {
         paths.bower + '/angular-treasure-overlay-spinner/dist/treasure-overlay-spinner.min.js',
         paths.srcLibJs + '/v3_epoly.js',
         paths.srcLibJs + '/canvas_marker.js',
+        paths.srcLibJs + '/snaptoroute.js',
         paths.bower + '/videogular/videogular.min.js',
         paths.bower + '/videogular-controls/vg-controls.min.js',
         paths.bower + '/videogular-buffering/vg-buffering.min.js',
         paths.bower + '/videogular-overlay-play/vg-overlay-play.min.js'
     ])
+        .pipe($.plumber())
         .pipe($.concat('vendor.min.js'))
-        .pipe($.uglify({mangle: false}).on('error', $.util.log))
+        .pipe($.if(args.production, $.uglify({mangle: false})))
         .pipe(gulp.dest(paths.destJs + '/'))
         .pipe($.size());
 });
