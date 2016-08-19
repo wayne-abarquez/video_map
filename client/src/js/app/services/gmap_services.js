@@ -311,7 +311,7 @@
             var polylineOptions = {
                 path: path,
                 strokeColor: lineColor || '#ff0000',
-                strokeOpacity: 1,
+                strokeOpacity: 0.2,
                 strokeWeight: 2
             };
 
@@ -333,7 +333,7 @@
                 draggable: false,
                 editable: false,
                 map: service.map,
-                strokeColor: lineColor || '#ff0000',
+                strokeColor: lineColor || '#34495e',
                 icons: [{
                     icon: lineSymbol,
                     offset: '0',

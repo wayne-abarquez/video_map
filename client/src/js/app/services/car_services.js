@@ -62,7 +62,8 @@
         function initialize() {
             gmapServices.initDirectionsService();
 
-            polyline = gmapServices.createPolyline(service.carPath);
+            //polyline = gmapServices.createPolyline(service.carPath);
+            polyline = gmapServices.createDashedPolyline(service.carPath);
             polylinePath = polyline.getPath().getArray();
             gmapServices.showPolyline(polyline);
 

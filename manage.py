@@ -1,5 +1,6 @@
 from app import app
 from app import db
+from app.data.sample_data import SampleData
 from flask.ext.script import Manager, prompt_bool
 from flask.ext.migrate import Migrate, MigrateCommand
 from app.auth_mod import models
@@ -24,24 +25,8 @@ def dropdb():
 
 
 @manager.command
-def create_test_users():
-    u = models.User()
-    u.username = 'navagis'
-    u.password = 'realAugData'
-    db.session.add(u)
-    db.session.commit()
-    print "Created test user"
-
-
-@manager.command
-def create_admin_user():
-    u = models.User()
-    u.username = 'admin'
-    u.password = 'password123'
-    db.session.add(u)
-    db.session.commit()
-    print "Created Navagis user"
-
+def init_users():
+    SampleData.generate_users()
 
 if __name__ == '__main__':
     manager.run()
